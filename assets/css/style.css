@@ -1,0 +1,321 @@
+/* Общий стиль для страницы */
+body {
+   
+    font-family: Arial, sans-serif;
+    background-color: #FFE4E1; /* Персиковый фон */
+    color: #351515; /* Темный текст */
+    font-size: 18px;
+    font-weight: 200;
+    margin: 0;
+}
+.content{
+    padding: 20px;
+}
+/* Заголовок */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #FFB6C1; /* Светлый персиковый */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Логотип */
+.pic {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo_text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #351515; /* Темный персиковый */
+}
+
+/* Кнопки в header */
+.nav_buttons {
+    display: flex;
+    gap: 15px; /* Отступы между кнопками */
+}
+
+.button {
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #FA8072; /* Лососевый цвет */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #E9967A; /* Темнее при наведении */
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Расстояние между элементами формы */
+    width: calc(100% - 30px); /* Занимает почти всю ширину экрана, с учетом отступов */
+    max-width: 100%; /* Ограничение ширины, чтобы избежать переполнения */
+    padding: 10px;
+    margin: 0 auto 20px 0; /* Прижимаем к левому краю (auto слева убрано), добавляем нижний отступ */
+    box-sizing: border-box;
+    background-color: #FFDAB9; /* Цвет фона для контейнера */
+    border-radius: 8px; /* Небольшие закругления углов */
+}
+
+.search-box input {
+    flex: 1 1 auto; /* Поля растягиваются, занимая оставшееся место */
+    max-width: 300px; /* Максимальная ширина для полей */
+    min-width: 150px; /* Минимальная ширина */
+    padding: 8px;
+    border: 1px solid #FF7F50;
+    border-radius: 4px;
+}
+
+.search-box button {
+    flex: 0 0 auto; /* Кнопка фиксированного размера */
+    padding: 10px 15px; /* Уменьшение размеров кнопки */
+    background-color: #FA8072;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    max-width: 200px;
+}
+
+.search-box button:hover {
+    background-color: #E9967A;
+}
+
+/* Добавляем отступы от краев экрана, как в .navigation */
+.main_window {
+    
+    width: 100%;
+}
+
+.form-container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #FFDAB9; /* Персиковый цвет */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    
+}
+/* Навигация */
+.navigation {
+    display: flex;
+    gap: 15px; /* Отступы между кнопками */
+    padding: 10px;
+    background-color: #FFDAB9; /* Персиковый */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.search-form{
+    display: flex;
+    gap: 15px; /* Отступы между кнопками */
+    padding: 10px;
+    background-color: #FFDAB9; /* Персиковый */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Кнопки навигации */
+.nav-button {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #FF7F50; /* Коралловый цвет */
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-button:hover {
+    background-color: #FF6347; /* Красноватый оттенок */
+    transform: scale(1.05);
+}
+
+.nav-button:active {
+    background-color: #FF4500; /* Темный коралловый */
+    transform: scale(1);
+}
+
+/* Заголовки */
+h1 {
+    text-align: left;
+    color: #351515;
+    margin: 20px 0;
+}
+
+/* Форма */
+form {
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #FFB6C1; /* Светлый персиковый */
+    color: #351515;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FF6347; /* Красноватый оттенок */
+    color: #ffffff;
+}
+
+label {
+    color: #351515;
+}
+.error-message {
+    color: #FF6347; /* Красновато-персиковый */
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+form label {
+    display: block;
+    font-size: 14px;
+    color: #351515;
+    margin-bottom: 5px;
+}
+
+form input[type="text"], 
+form input[type="email"], 
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #FFB6C1; /* Светло-персиковый */
+    border-radius: 4px;
+    box-sizing: border-box; /* Чтобы поле вписывалось в рамки */
+    font-size: 14px;
+    background-color: #FFF5EE; /* Бледно-персиковый */
+    color: #351515;
+}
+
+form input[type="text"]:focus, 
+form input[type="email"]:focus, 
+form input[type="password"]:focus {
+    border-color: #FF7F50; /* Более насыщенный персиковый */
+    outline: none;
+    box-shadow: 0 0 5px #FF7F50;
+}
+
+form button {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    background-color: #FF6347; /* Темный персиковый */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #E5533C; /* Более темный персиковый */
+}
+
+form button[type="button"] {
+    background-color: #FFDAB9; /* Светло-персиковый */
+    color: #351515;
+    margin-top: 10px;
+}
+
+form button[type="button"]:hover {
+    background-color: #FFB6C1; /* Насыщенный светло-персиковый */
+}
+
+
+
+
+/* Стиль для таблиц */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    background-color: #FFF5EE; /* Бледно-персиковый фон таблицы */
+    color: #351515; /* Темный текст */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    border: 1px solid #FFDAB9; /* Светло-персиковая граница */
+}
+
+/* Заголовки таблицы */
+table th {
+    background-color: #FF7F50; /* Коралловый фон заголовков */
+    color: #FFFFFF; /* Белый текст */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Чередующиеся строки */
+table tr:nth-child(even) {
+    background-color: #FFE4E1; /* Персиково-розовый фон для четных строк */
+}
+
+table tr:nth-child(odd) {
+    background-color: #FFDAB9; /* Светло-персиковый фон для нечетных строк */
+}
+
+/* Наведение на строку */
+table tr:hover {
+    background-color: #FFB6C1; /* Светло-лососевый при наведении */
+    transition: background-color 0.3s ease;
+}
+
+/* Кнопки внутри таблицы */
+table button {
+    background-color: #FF6347; /* Темно-персиковый */
+    color: #FFFFFF; /* Белый текст */
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+table button:hover {
+    background-color: #E9967A; /* Лососевый цвет */
+}
+
