@@ -64,7 +64,7 @@ body {
     width: calc(100% - 30px); /* Занимает почти всю ширину экрана, с учетом отступов */
     max-width: 100%; /* Ограничение ширины, чтобы избежать переполнения */
     padding: 10px;
-    margin: 0 auto 20px 0; /* Прижимаем к левому краю (auto слева убрано), добавляем нижний отступ */
+    margin: 0; /* Прижимаем к левому краю (auto слева убрано), добавляем нижний отступ */
     box-sizing: border-box;
     background-color: #FFDAB9; /* Цвет фона для контейнера */
     border-radius: 8px; /* Небольшие закругления углов */
@@ -282,8 +282,8 @@ table td {
 
 /* Заголовки таблицы */
 table th {
-    background-color: #FF7F50; /* Коралловый фон заголовков */
-    color: #FFFFFF; /* Белый текст */
+    background-color: #fc7e50; /* Коралловый фон заголовков */
+    color: #ffffff; /* Белый текст */
     font-weight: bold;
     text-transform: uppercase;
 }

@@ -8,15 +8,15 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 require_once 'config/db.php'; // Подключение к базе данных
-
+require_once 'config/header.php';
 // Проверяем роль пользователя
 $user_id = $_SESSION['user_id'];
 $stmt = $pdo->prepare('SELECT role FROM users WHERE id = :id');
 $stmt->execute(['id' => $user_id]);
 $user = $stmt->fetch();
 
-if (!$user || $user['role'] !== 'admin') {
-    echo "Доступ запрещен. Только администраторы могут добавлять места.";
+if (!$user || $user['role'] == 'user') {
+    echo "Доступ запрещен. Только владельцы полок могут добавлять места ."+ $user_id['role'];
     exit();
 }
 
@@ -31,11 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Пожалуйста, заполните все обязательные поля.";
     } else {
         // Добавление места в базу данных
-        $stmt = $pdo->prepare('INSERT INTO places (name, description, address) VALUES (:name, :description, :address)');
+        $stmt = $pdo->prepare('INSERT INTO places (name, description, address, user_id) 
+                               VALUES (:name, :description, :address, :user_id)');
         $stmt->execute([
             'name' => $place_name,
             'description' => $description,
-            'address' => $address
+            'address' => $address,
+            'user_id' => $user_id
         ]);
 
         echo "Место успешно добавлено.";
@@ -52,16 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header class="header">
-    <div class="pic">
-        <img src="assets/images/logo.png" alt="logo" class="logo"/>
-        <span class="logo_text">Костянка</span>
-    </div>
-    <nav class="nav_buttons">
-        <button onclick="window.location.href='user_page.php'" class="button">На главную</button>
-        <button onclick="window.location.href='logout.php'" class="button">Выйти</button>
-    </nav>
-</header>
 
 <main class="main_window">
     <h1>Добавить новое место</h1>

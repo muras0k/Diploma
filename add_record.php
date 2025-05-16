@@ -1,27 +1,37 @@
 <?php
-session_start();
 require_once 'config/db.php';
+require_once 'config/BookManager.php';
+
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $manager = new BookManager($pdo);
+
     $title = trim($_POST['title']);
     $author = trim($_POST['author']);
     $description = trim($_POST['description']);
     $action = $_POST['action'];
     $place_id = $_POST['place'];
     $user_id = $_SESSION['user_id'];
-    $created_at = date("Y-m-d H:i:s");
+    $genre = trim($_POST['genre']);
+    $photo = null;
 
     try {
-        $stmt = $pdo->prepare("
-            INSERT INTO books (title, author, description, action, owner_id, created_at, place_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ");
-        $stmt->execute([$title, $author, $description, $action, $user_id, $created_at, $place_id]);
+        // Проверка и загрузка файла
+        if (isset($_FILES['book_photo'])) {
+            $photo = $manager->validateFile($_FILES['book_photo']);
+        }
 
-        header('Location: dashboard.php');
-        exit();
-    } catch (PDOException $e) {
-        die("Ошибка при добавлении записи: " . $e->getMessage());
+        // Добавление книги
+        $manager->addBook($title, $author, $description, $action, $user_id, $place_id, $genre, $photo);
+
+        $_SESSION['message'] = "Книга успешно добавлена.";
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->getMessage();
     }
+
+    header('Location: dashboard.php');
+    exit();
 }
-?>
+
+

