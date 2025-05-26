@@ -36,6 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['role'] = $user['role'];
+
+                    $log = $pdo->prepare("INSERT INTO user_logs (user_id, action_type) VALUES (?, ?)");
+                    $log->execute([$user['id'], 'logged_in']);
+
                     header('Location: main.php');
                     exit();
                 } else {

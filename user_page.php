@@ -23,7 +23,7 @@ try {
         SELECT b.title, b.author, p.name AS place_name
         FROM books b
         LEFT JOIN places p ON b.place_id = p.id
-        WHERE b.owner_id = :user_id
+        WHERE b.owner_id = :user_id AND is_deleted = 0
     ");
     $stmt->execute(['user_id' => $user_id]);
     $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -251,7 +251,14 @@ document.getElementById('avatarForm').addEventListener('submit', function(e) {
                 <?php endif; ?>
             </tbody>
         </table>
+        
+    <form action="user_actions.php" method="get" style="margin-top: 15px;">
+        <button type="submit">Просмотр действий пользователей</button>
+    </form>
+
     <?php endif; ?>
+
+
 
     <h2>Ваши книги на полках</h2>
     <?php if (empty($books)): ?>

@@ -12,33 +12,46 @@ require_once 'config/header.php';
 $user_id = $_SESSION['user_id'];
 
 // Обработка удаления книги
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_book_id'])) {
-    $book_id = (int)$_POST['delete_book_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['taken_book_id'])) {
+    $book_id = (int)$_POST['taken_book_id'];
 
     try {
-        $stmt = $pdo->prepare('DELETE FROM books WHERE id = :book_id AND place_id IN (SELECT id FROM places WHERE user_id = :user_id)');
-        $stmt->execute([
-            'book_id' => $book_id,
-            'user_id' => $user_id
-        ]);
+        // Получаем данные книги
+        $stmt = $pdo->prepare("SELECT place_id FROM books WHERE id = ? AND place_id IN (SELECT id FROM places WHERE user_id = ?)");
+        $stmt->execute([$book_id, $user_id]);
+        $book = $stmt->fetch();
 
-        if ($stmt->rowCount() > 0) {
-            echo "<p>Книга успешно удалена.</p>";
+        if ($book) {
+            $place_id = $book['place_id'];
+            $created_at = date("Y-m-d H:i:s");
+
+            // Логируем, что книгу забрали (пользователь неизвестен)
+            $stmt = $pdo->prepare("
+                INSERT INTO user_logs (user_id, action_type, book_id, place_id, action_time)
+                VALUES (NULL, 'took_book', ?, ?, ?)
+            ");
+            $stmt->execute([$book_id, $place_id, $created_at]);
+
+            // Обновляем статус книги (мягкое удаление)
+            $stmt = $pdo->prepare("UPDATE books SET is_deleted = 1 WHERE id = ?");
+            $stmt->execute([$book_id]);
+
+            echo "<p>Книга помечена как забранная.</p>";
         } else {
-            echo "<p>Ошибка: Книга не найдена или вы не имеете права её удалять.</p>";
+            echo "<p>Ошибка: Книга не найдена или не принадлежит вам.</p>";
         }
     } catch (PDOException $e) {
-        echo "<p>Ошибка удаления книги: " . $e->getMessage() . "</p>";
+        echo "<p>Ошибка: " . $e->getMessage() . "</p>";
     }
 }
 
 // Получение книг, связанных с местами владельца
 $stmt = $pdo->prepare('
-    SELECT b.id AS book_id, b.title, b.author, p.name AS place_name, u.username 
+    SELECT b.id AS book_id, b.title, b.author, p.name AS place_name, u.username
     FROM books b
     JOIN places p ON b.place_id = p.id
     JOIN users u ON b.owner_id = u.id
-    WHERE p.user_id = :user_id
+    WHERE p.user_id = :user_id AND b.is_deleted = 0
 ');
 $stmt->execute(['user_id' => $user_id]);
 $books = $stmt->fetchAll();
@@ -78,9 +91,10 @@ $books = $stmt->fetchAll();
                         <td><?= htmlspecialchars($book['username']) ?></td>
                         <td>
                             <form method="POST" style="display:inline-block;">
-                                <input type="hidden" name="delete_book_id" value="<?= $book['book_id'] ?>">
-                                <button type="submit" class="button danger">Удалить</button>
-                            </form>
+                                <input type="hidden" name="taken_book_id" value="<?= $book['book_id'] ?>">
+                            <button type="submit" class="button warning">Книгу забрали</button>
+</form>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>

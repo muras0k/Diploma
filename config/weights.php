@@ -1,12 +1,12 @@
 <?php
 return array (
-  'action' => 
+  'action' =>
   array (
     'left' => 10,
     'taken' => 0,
   ),
   'place_popularity' => 1,
-  'genre' => 
+  'genre' =>
   array (
     'Фантастика' => 7,
     'Роман' => 3,

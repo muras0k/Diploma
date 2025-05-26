@@ -13,7 +13,7 @@ class BookManager
     public function addBook($title, $author, $description, $action, $user_id, $place_id, $genre, $photo)
     {
         $created_at = date("Y-m-d H:i:s");
-
+    
         try {
             // Добавление книги в базу данных
             $stmt = $this->pdo->prepare("
@@ -21,16 +21,29 @@ class BookManager
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
             $stmt->execute([$title, $author, $description, $action, $user_id, $created_at, $place_id, $genre, $photo]);
-
+    
+            // Получаем ID добавленной книги
+            $book_id = $this->pdo->lastInsertId();
+    
             // Увеличение популярности места
             $stmt = $this->pdo->prepare("UPDATE places SET usage_count = usage_count + 1 WHERE id = ?");
             $stmt->execute([$place_id]);
-
+    
+            // Логирование действия
+            $action_type = ($action === 'left') ? 'added_book' : 'took_book';
+            $stmt = $this->pdo->prepare("
+                INSERT INTO user_logs (user_id, action_type, book_id, place_id, action_time)
+                VALUES (?, ?, ?, ?, ?)
+            ");
+            $stmt->execute([$user_id, $action_type, $book_id, $place_id, $created_at]);
+    
             return true;
         } catch (PDOException $e) {
             throw new Exception("Ошибка при добавлении записи: " . $e->getMessage());
         }
     }
+    
+
 
     public function validateFile($file)
     {

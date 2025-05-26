@@ -37,8 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Если нет ошибок, создаем нового пользователя
             if (empty($errorMessage)) {
                 $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-                $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+                $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')");
                 if ($stmt->execute([$username, $email, $passwordHash])) {
+
+                    $newUserId = $pdo->lastInsertId();
+
+                    $log = $pdo->prepare("INSERT INTO user_logs (user_id, action_type) VALUES (?, ?)");
+                    $log->execute([$newUserId, 'registered']);
+                    
+
                     header("Location: main.php"); // Перенаправление на страницу успеха
                     exit;
                 } else {
