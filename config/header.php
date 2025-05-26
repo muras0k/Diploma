@@ -1,9 +1,11 @@
 <header class="header">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
     <div class="pic">
         <img src="assets/images/logo.png" alt="logo" class="logo"/>
         <span class="logo_text">Костянка</span>
     </div>
-    <nav class="nav_buttons">
+    <nav class="nav-buttons">
         <?php if (isset($_SESSION['user_id'])): ?>
             <button onclick="window.location.href='user_page.php'" class="button">Личный кабинет</button>
             <button onclick="window.location.href='logout.php'" class="button">Выйти</button>

@@ -34,6 +34,7 @@ $place = $placeStmt->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Места для обмена книг</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <h1>Отзывы о полке "<?php echo htmlspecialchars($place['name']); ?>"</h1>

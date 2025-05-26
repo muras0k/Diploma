@@ -21,11 +21,14 @@ try {
 
 <!DOCTYPE html>
 <html lang="ru">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Места для обмена книг</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 <main class="main_window">
@@ -43,7 +46,7 @@ try {
 
                     <p><strong>Средняя оценка:</strong> <?php echo $place['avg_rating'] ?? 'Нет оценок'; ?></p>
 
-                    <form action="place_reviews.php" method="get">
+                    <form class="but" action="place_reviews.php" method="get">
                         <input type="hidden" name="place_id" value="<?php echo $place['id']; ?>">
                         <button type="submit">Отзывы</button>
                     </form>

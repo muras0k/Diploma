@@ -151,6 +151,9 @@ $suggestionsAuthor = getSuggestions('author');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поиск книг</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const titleInput = document.getElementById('title');
@@ -232,6 +235,12 @@ document.getElementById('show-more').addEventListener('click', function () {
 
     </script>
     <style>
+        .header-right{
+            margin-left: 20px;
+        }
+        .button-for-search{
+            margin-left: auto;
+        }
         .suggestions {
             position: absolute;
             background: white;
@@ -286,12 +295,14 @@ document.getElementById('show-more').addEventListener('click', function () {
     <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>">
     <label for="author">Автор:</label>
     <input type="text" id="author" name="author" value="<?php echo htmlspecialchars($author); ?>">
-    <button type="submit">Найти</button>
+    <div>
     <input type="checkbox" id="on_shelf" name="on_shelf" <?php echo $on_shelf ? 'checked' : ''; ?>>
     <label for="on_shelf">Только книги на полках</label>
+    </div>
+    <button class="button-for-search" type="submit">Найти</button>
 </form>
 
-<h2>Книги</h2>
+<h1 class="header-right">Книги</h1>
 
 <?php if (empty($books)): ?>
     <p>Книги не найдены по указанным критериям.</p>

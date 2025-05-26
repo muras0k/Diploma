@@ -1,6 +1,12 @@
 /* Общий стиль для страницы */
+
+:root {
+    --default-font: "Merriweather",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --heading-font: "Roboto Slab",  sans-serif;
+    --nav-font: "Poppins",  sans-serif;
+}
+
 body {
-   
     font-family: Arial, sans-serif;
     background-color: #FFE4E1; /* Персиковый фон */
     color: #351515; /* Темный текст */
@@ -25,6 +31,7 @@ body {
 .pic {
     display: flex;
     align-items: center;
+    padding-left: 20px;
 }
 
 .logo {
@@ -43,10 +50,11 @@ body {
 .nav_buttons {
     display: flex;
     gap: 15px; /* Отступы между кнопками */
+    padding-left: 20px;
 }
 
 .button {
-    padding: 8px 15px;
+    padding: 8px 10px;
     text-decoration: none;
     color: #ffffff;
     background-color: #FA8072; /* Лососевый цвет */
@@ -64,7 +72,7 @@ body {
     width: calc(100% - 30px); /* Занимает почти всю ширину экрана, с учетом отступов */
     max-width: 100%; /* Ограничение ширины, чтобы избежать переполнения */
     padding: 10px;
-    margin: 0; /* Прижимаем к левому краю (auto слева убрано), добавляем нижний отступ */
+    margin: 10px; /* Прижимаем к левому краю (auto слева убрано), добавляем нижний отступ */
     box-sizing: border-box;
     background-color: #FFDAB9; /* Цвет фона для контейнера */
     border-radius: 8px; /* Небольшие закругления углов */
@@ -117,7 +125,7 @@ body {
     padding: 10px;
     background-color: #FFDAB9; /* Персиковый */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+
 }
 .search-form{
     display: flex;
@@ -157,12 +165,18 @@ h1 {
     text-align: left;
     color: #351515;
     margin: 20px 0;
+    margin-left: 20px;
 }
-
+h2{
+    margin-left: 20px;
+}
+p{
+    margin-left: 20px;
+}
 /* Форма */
 form {
     max-width: 650px;
-    margin: 20px auto;
+    margin: 20px 0 20px 20px;
     padding: 20px;
     background-color: #FFFFFF;
     border-radius: 8px;
@@ -238,7 +252,7 @@ form button {
     font-size: 16px;
     font-weight: bold;
     color: #FFF;
-    background-color: #FF6347; /* Темный персиковый */
+    background-color: #fa7760; /* Темный персиковый */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

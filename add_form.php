@@ -9,7 +9,7 @@ try {
     die("Ошибка при загрузке мест: " . $e->getMessage());
 }
 ?>
-
+<link rel="stylesheet" href="assets/css/main.css">
 <form method="POST" id="form" enctype="multipart/form-data" action="add_record.php">
     <h2>Добавить запись</h2>
 

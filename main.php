@@ -16,6 +16,7 @@ require_once 'config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Костянка - лучший сайт обмена книг</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
   </head>
   <body>
     
@@ -25,7 +26,7 @@ require_once 'config/db.php';
         <div class="content">
         <h1 class="page_title">Добро пожаловать на Костянку!</h1>
         <div class="about_content">
-            <label>Что такое Буккроссинг?</label>
+            <label style=" margin-left: 20px;">Что такое Буккроссинг?</label>
             <p>Буккроссинг (bookcrossing) возник в 2001 году по инициативе специалиста по интернет-технологиям, американца Рона Хорнбэкера.
                 Движение из США переместилось в Европу и было тепло встречено в Италии, затем во Франции и по всей Европе, вплоть до
                 Финляндии. В общем же, сейчас по миру в системе распространения книг зарегистрировано более 2 миллионов участников и 10 миллионов книг.

@@ -160,25 +160,27 @@ $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет</title>
+    
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 <main class="main_window">
-    <h1>Личный кабинет</h1>
-    <p>Добро пожаловать, <strong><?= htmlspecialchars($currentUser['username']) ?></strong>!</p>
-    <p>Ваша роль: <strong><?= htmlspecialchars($currentUser['role']) ?></strong></p>
+    <h1 style="margin-left: 20px;">Личный кабинет</h1>
+    <p style="margin-left: 20px;">Добро пожаловать, <strong><?= htmlspecialchars($currentUser['username']) ?></strong>!</p>
+    <p style="margin-left: 20px;">Ваша роль: <strong><?= htmlspecialchars($currentUser['role']) ?></strong></p>
 
-    <h2>Ваш аватар</h2>
+    <h2 style="margin-left: 20px;">Ваш аватар</h2>
 <?php if (!empty($currentUser['avatar_path']) && file_exists($currentUser['avatar_path'])): ?>
-    <img src="<?= htmlspecialchars($currentUser['avatar_path']) ?>" alt="Аватар пользователя" style="max-width: 150px; max-height: 150px;">
+    <img src="<?= htmlspecialchars($currentUser['avatar_path']) ?>" alt="Аватар пользователя" style="max-width: 150px; max-height: 150px; margin-left: 20px;">
 <?php else: ?>
-    <p>У вас пока нет аватарки. Загрузите её с помощью формы выше.</p>
+    <p>У вас пока нет аватарки.</p>
 <?php endif; ?>
 
 
 
 <form method="POST" enctype="multipart/form-data" id="avatarForm">
-    <label for="avatar">Выберите изображение:</label>
+    <label for="avatar">Выберите изображение для аватара:</label>
     <input type="file" name="avatar" id="avatar" accept="image/png, image/jpeg">
     <button type="submit">Загрузить</button>
 </form>
@@ -198,7 +200,7 @@ document.getElementById('avatarForm').addEventListener('submit', function(e) {
 
 
     <?php if ($is_admin): ?>
-        <h2>Настройка весов</h2>
+        <h2 style="margin-left: 20px;">Настройка весов</h2>
         <form method="POST">
             <p>Вес за действие</p>
             <label>Оставили книгу: <input type="number" name="action_left" value="<?= $weights['action']['left'] ?>"></label><br>
@@ -221,7 +223,7 @@ document.getElementById('avatarForm').addEventListener('submit', function(e) {
             <button type="submit">Сохранить</button>
         </form>
 
-        <h2>Пользователи с ролью user</h2>
+        <h2 style="margin-left: 20px;">Пользователи с ролью user</h2>
         <table>
             <thead>
                 <tr>
@@ -260,7 +262,7 @@ document.getElementById('avatarForm').addEventListener('submit', function(e) {
 
 
 
-    <h2>Ваши книги на полках</h2>
+    <h2 style="margin-left: 20px;">Ваши книги на полках</h2>
     <?php if (empty($books)): ?>
         <p>У вас пока нет добавленных книг.</p>
     <?php else: ?>
@@ -285,7 +287,7 @@ document.getElementById('avatarForm').addEventListener('submit', function(e) {
     <?php endif; ?>
 
     <?php if ($currentUser['role'] === 'holder' || $is_admin): ?>
-        <h2>Действия для владельцев полок</h2>
+        <h2 style="margin-left: 20px;">Действия для владельцев полок</h2>
         <p><a href="add_place.php" class="button">Добавить место</a></p>
         <p><a href="holder_books.php" class="button">Книжки на вашей полке</a></p>
     <?php endif; ?>

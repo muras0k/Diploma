@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = htmlspecialchars($user['username']);
 
             $stmt = $pdo->prepare("
-                SELECT ul.*, b.title AS book_title, p.name AS shelf_name
+                SELECT ul.*, b.title AS book_title, p.name AS place_name
                 FROM user_logs ul
                 LEFT JOIN books b ON ul.book_id = b.id
                 LEFT JOIN places p ON ul.place_id = p.id
@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Действия пользователя</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
     <h2>Просмотр действий пользователя</h2>
@@ -88,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <td><?= htmlspecialchars($action['action_time']) ?></td>
                     <td><?= htmlspecialchars($action['action_type']) ?></td>
                     <td><?= htmlspecialchars($action['book_title'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($action['shelf_name'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($action['place_name'] ?? '-') ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

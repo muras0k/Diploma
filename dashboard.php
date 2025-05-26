@@ -51,7 +51,9 @@ $pdo = new PDO("mysql:host=localhost;dbname=book_exchange", "root", "");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 <main class="main_window">
