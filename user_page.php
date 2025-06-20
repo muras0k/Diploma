@@ -222,37 +222,57 @@ document.getElementById('avatarForm').addEventListener('submit', function(e) {
 
             <button type="submit">Сохранить</button>
         </form>
+        <h2 style="margin-left: 20px;">Поиск пользователей для повышения</h2>
 
-        <h2 style="margin-left: 20px;">Пользователи с ролью user</h2>
-        <table>
+<form method="GET" style="margin-left: 20px; margin-bottom: 15px;">
+    <label for="search_username">Имя пользователя:</label>
+    <input type="text" name="search_username" id="search_username" value="<?= isset($_GET['search_username']) ? htmlspecialchars($_GET['search_username']) : '' ?>">
+    <button type="submit">Найти</button>
+</form>
+
+<?php
+$foundUsers = [];
+
+if ($is_admin && isset($_GET['search_username']) && strlen(trim($_GET['search_username'])) > 0) {
+    $searchTerm = '%' . trim($_GET['search_username']) . '%';
+    $stmt = $pdo->prepare('SELECT id, username FROM users WHERE role = "user" AND username LIKE :username');
+    $stmt->execute(['username' => $searchTerm]);
+    $foundUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
+
+<?php if (!empty($_GET['search_username'])): ?>
+    <?php if (empty($foundUsers)): ?>
+        <p style="margin-left: 20px;">Пользователи не найдены.</p>
+    <?php else: ?>
+        <table style="margin-left: 20px;">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Имя пользователя</th>
-                    <th>Действия</th>
+                    <th>Действие</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (empty($usersToPromote)): ?>
+                <?php foreach ($foundUsers as $user): ?>
                     <tr>
-                        <td colspan="3">Нет пользователей с ролью user.</td>
+                        <td><?= htmlspecialchars($user['id']) ?></td>
+                        <td><?= htmlspecialchars($user['username']) ?></td>
+                        <td>
+                            <form method="POST" style="display:inline-block;">
+                                <input type="hidden" name="promote_user_id" value="<?= $user['id'] ?>">
+                                <button type="submit" onclick="return confirm('Вы уверены, что хотите повысить этого пользователя до владельца полки?');">
+                                    Повысить до Владельца полки
+                                </button>
+                            </form>
+                        </td>
                     </tr>
-                <?php else: ?>
-                    <?php foreach ($usersToPromote as $user): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($user['id']) ?></td>
-                            <td><?= htmlspecialchars($user['username']) ?></td>
-                            <td>
-                                <form method="POST" style="display:inline-block;">
-                                    <input type="hidden" name="promote_user_id" value="<?= $user['id'] ?>">
-                                    <button type="submit"onclick="return confirm('Вы уверены, что хотите изменить роль этого пользователя?');">Повысить до holder</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
+    <?php endif; ?>
+<?php endif; ?>
+
         
     <form action="user_actions.php" method="get" style="margin-top: 15px;">
         <button type="submit">Просмотр действий пользователей</button>

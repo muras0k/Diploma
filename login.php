@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $log = $pdo->prepare("INSERT INTO user_logs (user_id, action_type) VALUES (?, ?)");
                     $log->execute([$user['id'], 'logged_in']);
 
-                    header('Location: main.php');
+                    header('Location: dashboard.php');
                     exit();
                 } else {
                     $errorMessage = "Неверный email или пароль.";

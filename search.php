@@ -70,19 +70,19 @@ $query = "
 $params = [];
 
 // Фильтры
-if ($on_shelf) {
-    $query .= " AND action = 'left'";
-}
+// if ($on_shelf) {
+//     $query .= " AND action = 'left'";
+// }
 
-if ($title) {
-    $query .= " AND title LIKE ?";
-    $params[] = "%$title%";
-}
+// if ($title) {
+//     $query .= " AND title LIKE ?";
+//     $params[] = "%$title%";
+// }
 
-if ($author) {
-    $query .= " AND author LIKE ?";
-    $params[] = "%$author%";
-}
+// if ($author) {
+//     $query .= " AND author LIKE ?";
+//     $params[] = "%$author%";
+// }
 
 try {
     $stmt = $pdo->prepare($query);
@@ -94,7 +94,7 @@ try {
 }
 
 // Функция для расчета веса книги
-function calculateWeight($book, $weights)
+function calculateWeight($book, $weights, $on_shelf, $author, $title)
 {
     $weight = 0;
 
@@ -104,13 +104,43 @@ function calculateWeight($book, $weights)
     $weight += $weights['genre'][$genre] ?? $weights['genre']['default'];
     $recent = strtotime($book['added_time']) > strtotime('-1 week');
     $weight += $recent ? $weights['recent_time'] : 0;
+    if ($author && isset($book['author'])) {
+        $input = mb_strtolower($author);
+        $target = mb_strtolower($book['author']);
 
+        if (mb_strpos($target, $input) === 0) {
+            $weight += 150;
+        } else {
+            similar_text($input, $target, $percent);
+            if ($percent > 30) {
+                $weight += (int)$percent;
+            }
+        }
+    }
+
+    // Название
+    if ($title && isset($book['title'])) {
+        $input = mb_strtolower($title);
+        $target = mb_strtolower($book['title']);
+
+        if (mb_strpos($target, $input) === 0) {
+            $weight += 150;
+        } else {
+            similar_text($input, $target, $percent);
+            if ($percent > 30) {
+                $weight += (int)$percent;
+            }
+        }
+    }
+    if ($book['action'] == 'left' && $on_shelf) {
+        $weight += 100;
+    }
     return $weight;
 }
 
 // Рассчитать вес для каждой книги
 foreach ($books as &$book) {
-    $book['weight'] = calculateWeight($book, $weights);
+    $book['weight'] = calculateWeight($book, $weights, $on_shelf, $author, $title);
 }
 unset($book);
 
@@ -235,6 +265,10 @@ document.getElementById('show-more').addEventListener('click', function () {
 
     </script>
     <style>
+        .search-box {
+        position: relative;
+        }
+
         .header-right{
             margin-left: 20px;
         }

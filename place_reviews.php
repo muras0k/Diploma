@@ -46,14 +46,14 @@ $place = $placeStmt->fetch(PDO::FETCH_ASSOC);
         <div class="review-item">
             <p><strong><?php echo htmlspecialchars($review['username']); ?></strong> (<?php echo $review['rating']; ?>/5)</p>
             <p><?php echo nl2br(htmlspecialchars($review['comment'])); ?></p>
-            <small><?php echo $review['created_at']; ?></small>
+            <p><?php echo $review['created_at']; ?></p>
             <hr>
         </div>
     <?php endforeach; ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['user_id'])): ?>
-    <h3>Оставить отзыв:</h3>
+    <h2>Оставить отзыв:</h2>
     <form action="add_review.php" method="post">
         <input type="hidden" name="place_id" value="<?php echo $place_id; ?>">
         <label for="rating">Оценка:</label>

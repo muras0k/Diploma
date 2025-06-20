@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h2>Просмотр действий пользователя</h2>
-
+<!-- вывод по времени и логин -->
     <form method="post">
         <label>Введите ID или имя пользователя:</label><br>
         <input type="text" name="user_identifier" value="<?= htmlspecialchars($user_input) ?>">
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <?php if ($actions): ?>
-        <h3>Действия пользователя <?= htmlspecialchars($username ?? '') ?></h3>
+        <h2>Действия пользователя <?= htmlspecialchars($username ?? '') ?></h2>
         <table>
             <tr>
                 <th>Дата и время</th>
